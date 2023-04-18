@@ -1,1 +1,1 @@
--- require("control/server.lua")
+require("control/server.lua")

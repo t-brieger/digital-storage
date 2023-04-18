@@ -1,9 +1,14 @@
 data:extend({{
-    type = "container",
+    type = "electric-energy-interface",
     name = "digistore:server-entity",
     
-    -- TODO this is probably not meant to stay a container; add actual server-related behaviour!
-    inventory_size = 1,
+    energy_source = {
+        type = "electric",
+        buffer_capacity = "10TJ",
+        -- TODO maybe make this configurable? but by default, you probably want logistics to keep working.
+        usage_priority = "primary-input",
+        output_flow_limit = "0W"
+    },
 
     picture = {
         filename = "__digital-storage__/sprites/entities/network-server.png",

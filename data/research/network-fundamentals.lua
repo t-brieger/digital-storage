@@ -2,15 +2,7 @@ data:extend({{
     type = "technology",
     name = "digistore:network-fundamentals",
     prerequisites = {"plastics"},
-    effects = {
-        {
-            type = "nothing",
-            effect_description = {'digistore:other.sample-bonus'},
-            icon = "__digital-storage__/sprites/base-placeholder.png",
-            icon_size = 128,
-            icon_mipmaps = 4
-        }
-    },
+    effects = {    },
     unit = {
         count = 50,
         ingredients = {
