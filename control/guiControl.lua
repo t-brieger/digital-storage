@@ -7,13 +7,14 @@ function control.redrawGui()
     end
     control.currentGui.redraw()
 end
-function control.setActiveGui(topLevelElement, redraw)
+function control.setActiveGui(topLevelElement, redraw, entity)
     if control.currentGui ~= nil then
         control.closeActiveGui()
     end
     control.currentGui = {
         element = topLevelElement,
-        redraw = redraw
+        redraw = redraw,
+        entity = entity
     }
 end
 function control.closeActiveGui()

@@ -6,26 +6,44 @@ local util = {}
 local handlers = {}
 
 -- surely there's a better way to have multiple event handlers than this?
-function util.AddEventHandler(event, handler)
-    if handlers[event] == nil then
-        handlers[event] = {}
-        script.on_event(event,
-            function(e)
-                for _, f in pairs(handlers[event]) do
-                    f(e)
-                end
+-- we can't use filters: as the docs state, 
+--      "Each mod can only register once for every event. [...] This holds true even if different filters are used for subsequent registrations."
+function util.AddEventHandler(events, handler, fireLast)
+    if type(events) == "table" then
+        for _, event in pairs(events) do
+            if handlers[event] == nil then
+                handlers[event] = {}
+                script.on_event(event,
+                    function(e)
+                        for _, f in pairs(handlers[event]) do
+                            f(e)
+                            -- not exactly a great way to do it, but I believe the only "universal" one across types of events:
+                            -- some fields on events can become "invalid" for various reasons (like, for examples, GUI elements being destroyed)
+                            -- if this happens, stop calling further handlers (because they would probably error)
+                            for __, field in pairs(e) do
+                                if field and type(field) == "table" and field.valid ~= nil and not field.valid then
+                                    return
+                                end
+                            end
+                        end
+                    end
+                )
             end
-        )
+            
+            table.insert(handlers[event], handler)
+        end
+
+        return
     end
-    
-    table.insert(handlers[event], handler)
+
+    util.AddEventHandler({events}, handler)
 end
 
 function util.StartsWith(str, start)
     return str:sub(1, #start) == start
 end
 
-function util.OverwriteGui(entityName, buildGui, update)
+function util.OverwriteGui(entityName, buildGui, redrawFunctionFactory)
     util.AddEventHandler(
         defines.events.on_gui_opened,
         function(event)
@@ -41,7 +59,7 @@ function util.OverwriteGui(entityName, buildGui, update)
             }
             local new_gui = buildGui(info)
             info.element = new_gui
-            gc.setActiveGui(new_gui, update(info))
+            gc.setActiveGui(new_gui, redrawFunctionFactory(info), event.entity)
             player.opened = new_gui
         end
     )
@@ -56,7 +74,15 @@ util.AddEventHandler(
         end
     )
 
--- probably not very efficient, but the player will (hopefully) not be running around just having a config GUI open so it's not a huge problem.
+util.AddEventHandler(
+        {defines.events.on_entity_died, defines.events.on_player_mined_entity, defines.events.on_robot_mined_entity},
+        function(e)
+            if gc.currentGui and e.entity.unit_number == gc.currentGui.entity.unit_number then
+                gc.closeActiveGui()
+            end
+        end
+    )
+
 util.AddEventHandler(
         defines.events.on_tick,
         gc.redrawGui
