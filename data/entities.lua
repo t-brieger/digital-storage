@@ -1,1 +1,1 @@
-require("./entities/server.lua")
+require("data/entities/server.lua")

@@ -1,4 +1,4 @@
-local util = require("./util.lua")
+local util = require("control/util.lua")
 
 local guis = {}
 

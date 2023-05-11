@@ -1,1 +1,1 @@
-require("./research/network-fundamentals.lua")
+require("data/research/network-fundamentals.lua")
