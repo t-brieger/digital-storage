@@ -1,4 +1,4 @@
-local gc = require("./guiControl.lua")
+local gc = require("control/guiControl.lua")
 
 local util = {}
 

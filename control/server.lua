@@ -1,6 +1,6 @@
-local util = require("./util.lua")
-local guis = require("./guiComponents.lua")
-local guiControl = require("./guiControl.lua")
+local util = require("control/util.lua")
+local guis = require("control/guiComponents.lua")
+local guiControl = require("control/guiControl.lua")
 
 local function NetworkCreationGui(info)
     local newgui = info.parent.add({
