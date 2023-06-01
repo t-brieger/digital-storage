@@ -6,6 +6,6 @@
     "contact": "Azrael#1123 on discord; t-brieger@gmx.de",
     "homepage": "https://github.com/t-brieger/digital-storage",
     "description": "Mod that adds digital storage and logistics options, heavily inspired (but not affiliated with) the Minecraft mod Applied Energistics 2.",
-    "factorio_version": "1.1",
-    "dependencies": ["base >= 1.1"]
+    "factorio_version": "1.1.69",
+    "dependencies": ["base >= 1.1.69"]
 }
