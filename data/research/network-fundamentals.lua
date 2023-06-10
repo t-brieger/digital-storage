@@ -12,6 +12,6 @@ data:extend({{
     },
 
     icon = "__digital-storage__/sprites/technology/network-fundamentals.png",
-    icon_size = 128,
+    icon_size = 400,
     icon_mipmaps = 4
 }})
