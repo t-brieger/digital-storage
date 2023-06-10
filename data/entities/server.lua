@@ -4,7 +4,7 @@ data:extend({{
     
     energy_source = {
         type = "electric",
-        buffer_capacity = "10TJ",
+        buffer_capacity = "5MW",
         -- TODO maybe make this configurable? but by default, you probably want logistics to keep working.
         usage_priority = "primary-input",
         output_flow_limit = "0W"
@@ -12,11 +12,11 @@ data:extend({{
 
     picture = {
         filename = "__digital-storage__/sprites/entities/network-server.png",
-        size = 128,
+        size = 126,
         scale = 1.0/2.0
     },
     icon = "__digital-storage__/sprites/items/network-server.png",
-    icon_size = 128,
+    icon_size = 126,
     icon_mipmaps = 4,
     
     drawing_box = {{-1, -1}, {1, 1}},

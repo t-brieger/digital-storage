@@ -3,7 +3,7 @@ data:extend({{
     name = "digistore:server-item",
 
     icon = "__digital-storage__/sprites/items/network-server.png",
-    icon_size = 128,
+    icon_size = 126,
     icon_mipmaps = 4,
 
     place_result = 'digistore:server-entity',
